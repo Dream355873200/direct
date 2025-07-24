@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙少导航 新人必红</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4b53b0 100%, #1b1616 5%,#83bdfc 0% );
+            color: #fff;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        @media (max-width: 768px) {
+    .button-container {
+        grid-template-columns: 1fr; /* 单列布局 */
+    }
+    
+    .game-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
+         /* 轮播图容器 */
+.slider-container {
+    width: 100%;
+    height: 200px; /* 根据实际图片高度调整 */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* 轮播图 */
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+/* 单张轮播图 */
+.slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0,0.2);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .slider-container {
+        height: 150px;
+    }
+}
+    /* 轮播导航按钮 */
+    .slider-nav {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+    
+    .slider-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+    }
+    
+    .slider-dot.active {
+        background: #fff;
+    }
+    
+    /* 左右箭头 */
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background: rgba(0,0,0,0.3);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 2;
+    }
+    
+    .slider-arrow.prev {
+        left: 15px;
+    }
+    
+    .slider-arrow.next {
+        right: 15px;
+    }
+        /* 顶部导航栏 */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .wangwang-id {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .home-link {
+            
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 广告区域 */
+        .ad-container {
+            background: linear-gradient(90deg, #ff7b89, #ff6b8b);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .ad-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-title:before {
+            content: "🔥";
+            margin-right: 5px;
+        }
+        
+        .ad-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* 账户信息区域 */
+        .account-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .total-assets {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .money {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .money:before {
+            content: "￥";
+            font-size: 26px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .vip-btn, .invite-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            max-width: 150px;
+            cursor: pointer;
+        }
+        
+        .vip-btn {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .invite-btn {
+            background: linear-gradient(90deg, #42e695, #3bb2b8);
+            color: #fff;
+        }
+        
+        /* 邀请区域 */
+        .invite-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .invite-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .invite-subtitle {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+        
+        .invite-heading {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .invite-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .invite-box h3 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .novice-nav {
+            background: linear-gradient(90deg, #FF416C, #FF4B2B);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .backup-link {
+            font-size: 14px;
+        }
+        
+        .backup-link a {
+            color: #00ffea;
+            text-decoration: none;
+        }
+        
+        /* 游戏推荐区域 */
+        .games-section {
+            margin-top: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        
+        .filter-btn.active {
+            background: #3bb2b8;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .official-tag {
+            background: linear-gradient(90deg, #42e695, #3bb2b8);
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .game-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-promo {
+            background: linear-gradient(90deg, #fd1d1d, #fcb045);
+            font-size: 12px;
+            padding: 3px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .img-icon
+        {
+            margin: auto;
+            display: block; /* 让图片变成块级元素 */
+               max-width: 100%; /* 最大宽度不超过容器 */
+               height: auto;    /* 高度自动调整 */
+                 max-height: 50px; /* 限制最大高度 */
+        }
+        .button-container {
+       display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    justify-content: center; /* 水平居中 */
+    gap: 15px; /* 按钮间距 */
+    max-width: 80%; /* 限制容器宽度，避免按钮太分散 */
+    margin: 0 auto; /* 水平居中整个容器 */
+}
+        .play-btn {
+         display: block; /* 改为块级元素 */
+    width: 100%; /* 填满父容器 */
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #42e695, #3bb2b8);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 10px; /* 增加上边距 */
+        }
+        
+        .top-game {
+            border: 2px solid #ffcc00;
+        }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        
+        let currentIndex = 0;
+        const slideCount = slides.length;
+        
+        // 更新轮播位置
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // 更新导航点状态
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        // 下一张
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlider();
+        }
+        
+        // 上一张
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+        
+        // 点击导航点跳转
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+        });
+        
+        // 按钮事件
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // 自动轮播（每5秒）
+        setInterval(nextSlide, 5000);
+    });
+</script>
+</head>
+<body>
+    <div class="container">
+        <!-- 轮播图 -->
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide" style="background-image: url('img/龙少.jpg');"></div>
+        <div class="slide" style="background-image: url('img/月入过万.jpeg');"></div>
+
+    </div>
+    
+    <!-- 导航箭头 -->
+    <div class="slider-arrow prev">❮</div>
+    <div class="slider-arrow next">❯</div>
+    
+    <!-- 导航圆点 -->
+    <div class="slider-nav">
+        <div class="slider-dot active"></div>
+        <div class="slider-dot"></div>
+
+    </div>
+</div>
+        <!-- 顶部导航 -->
+        <div class="top-bar">
+            <div class="wangwang-id">旺旺号655872490</div>
+            <div class="home-link">首页</div>
+            <div></div> <!-- 占位元素 -->
+        </div>
+        
+
+        
+
+        <!-- 邀请区域 -->
+        <div class="invite-container">
+
+            <div class="invite-box">
+
+                <div class="nav-container">
+                    <div class="novice-nav">龙少导航 新人必红</div>
+                    <div class="backup-link">备用导航链接：暂无<a href="#"></a></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 游戏推荐区域 -->
+        <div class="games-section">
+            <div class="section-header">
+                <div class="section-title">推荐游戏</div>
+                <div class="filter-buttons">
+                    <div class="filter-btn active">全部游戏</div>
+                    <div class="filter-btn">官方</div>
+                </div>
+            </div>
+            
+            <div class="button-container">
+
+                   <!-- 游戏1 -->
+                <div class="game-card">
+                    <img class="img-icon" src="img/非凡娱乐.jpg" alt="">
+                    <div class="official-tag">官方</div>
+                    <div class="game-name">主推非凡娱乐</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wxjump.paradisemall.net/app/register.php?site_id=1050&topId=321852&selfPlanId=912705" class="play-btn">进入游戏</a>
+                </div>
+                
+                <!-- 游戏3 -->
+                <div class="game-card">
+                    <img class="img-icon" src="img/TOP1.jpg" alt="">
+                    <div class="official-tag">官方</div>
+                    <div class="game-name">主推TOP1体育</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wxjump.paradisemall.net/app/register.php?site_id=1051&topId=107068" class="play-btn">进入游戏</a>
+                </div>
+                
+                <!-- 游戏4 -->
+                <div class="game-card">
+                    <img class="img-icon" src="img/豪门.jpg" alt="">
+                    <div class="official-tag">官方</div>
+                     <div class="game-name">豪门国际</div>
+                     <div class="game-promo">新用户注册送28</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wcwx.paradisemall.net/app/register.php?site_id=1008&topId=2069745" class="play-btn">进入游戏</a>
+                </div>
+                
+              <div class="game-card">
+                <img class="img-icon" src="img/旺财28.jpg" alt="">
+                <div class="official-tag">官方</div>
+                     <div class="game-name">旺财28</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wxjump.paradisemall.net/app/register.php?site_id=1012&topId=2382364" class="play-btn">进入游戏</a>
+                </div>
+                
+                <div class="game-card">
+                    <img class="img-icon" src="img/壹号娱乐.jpg" alt="">
+                    <div class="official-tag">官方</div>
+                     <div class="game-name">壹号娱乐</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wcwx.paradisemall.net/app/register.php?site_id=800&topId=17099949" class="play-btn">进入游戏</a>
+                </div>
+
+                 <div class="game-card">
+                    <img class="img-icon" src="img/28圈.jpg" alt="">
+                    <div class="official-tag">官方</div>
+                     <div class="game-name">28圈</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://156.234.70.10:61108/#/link?allwin=9034449" class="play-btn">进入游戏</a>
+                </div>
+
+                <div class="game-card">
+                    <img class="img-icon" src="img/狗子.jpg" alt="">
+                        <div class="official-tag">官方</div>
+                     <div class="game-name">狗子28</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://wxjump.paradisemall.net/app/register.php?site_id=1010&topId=2716967" class="play-btn">进入游戏</a>
+                </div>
+                 <div class="game-card">
+                        <img class="img-icon" src="img/东升.jpg" alt="">
+                        <div class="official-tag">官方</div>
+                     <div class="game-name">东升国际</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://tz.wx-nbirvm2.com/app/register.php?site_id=2173&topId=2034059" class="play-btn">进入游戏</a>
+                </div>
+                   
+                    <div class="game-card">
+                        <img class="img-icon" src="img/国际人.jpg" alt="">
+                        <div class="official-tag">官方</div>
+                     <div class="game-name">国际人</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <div class="game-promo">充值一百送一百</div>
+                    <a href="https://tz.wx-ulslyd12.com/app/register.php?site_id=2304&topId=739439" class="play-btn">进入游戏</a>
+                </div>
+                    <div class="game-card">
+                        <img class="img-icon" src="img/盈冠国际.jpg" alt="">
+                        <div class="official-tag">官方</div>
+                     <div class="game-name">盈冠国际新台大水</div>
+                    <div class="game-promo">新用户充值1000返388</div>
+                    <a href="https://tz.wx-nsltxf14.com/app/register.php?site_id=132623250&topId=54058" class="play-btn">进入游戏</a>
+                </div>
+                     <div class="game-card">
+                        <img class="img-icon" src="img/保时捷.jpg" alt="">
+                        <div class="official-tag">官方</div>
+                     <div class="game-name">保时捷</div>
+                    <div class="game-promo">8月1上线</div>
+                    <a href="https://tz.wx-nsltxf14.com/app/register.php?site_id=134523275&topId=57081" class="play-btn">进入游戏</a>
+                </div>
+                                     <div class="game-card">
+                                        <img class="img-icon" src="img/传奇国际.jpg" alt="">
+                                        <div class="official-tag">官方</div>
+                     <div class="game-name">期待上线 传奇国际</div>
+                    <div class="game-promo">上线充值1000返500</div>
+                    <a href="" class="play-btn">进入游戏</a>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+</body>
+</html>
